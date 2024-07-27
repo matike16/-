@@ -1,0 +1,58 @@
+/* 默认样式的代码 */
+*{
+    margin: 0;
+    padding: 0;
+    /* 内减模式 */
+    box-sizing: border-box;
+}
+/* 整体body背景色 */
+body{
+    /* background:linear-gradient(to bottom,blue,3%,#fff) no-repeat; */
+    /* background-color: rgba(110, 77, 255, 0.3); */
+    background-color: #fff;
+    /* background-attachment: fixed;  */
+}
+
+/* 清除修饰与浮动 */
+li{
+    list-style: none;
+}
+a{
+    text-decoration: none;
+}
+.clearfix::before,.clearfix::after{
+    content: "";
+    display: table;
+}
+.clearfix::after{
+    clear:both;
+}
+input{
+    border:0;
+    outline: none;
+}
+button{
+    border:0;
+    outline: none;
+    background-color: transparent;
+}
+
+/* 确定版心 */
+.wrapper{
+    width: 1450px;
+    margin: 0 auto;
+}
+
+/* 滚动条样式 */
+body::-webkit-scrollbar{
+    width:5px;
+    height: 100%;
+}
+/* 滚动的滑块 */
+body::-webkit-scrollbar-thumb{
+    background-color: hsl(230deg 69% 61%);
+}
+
+iframe{
+    border:none;
+}

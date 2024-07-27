@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="ch">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>离散数学计算程序</title>
+    <style>
+        /* 设置全局边距和基本样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        button {
+            cursor: pointer;
+            border: none;
+            outline: none;
+            background-color: transparent;
+        }
+
+        input {
+            border: none;
+            outline: none;
+            background-color: transparent;
+        }
+
+        /* 添加外部主卡片 */
+        .card {
+            width: 600px;
+            height: 400px;
+            margin: 300px auto;
+            box-shadow: 0 2px 14px 0 rgba(0, 0, 0, 0.2);
+            border-radius: 1rem;
+            background-color: #007bff;
+            transition: all 0.5s;
+        }
+
+        /* 主卡片阴影效果 */
+        .card:hover {
+            box-shadow: 0px 2px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        /* 卡片左边 */
+        .cardleft {
+            float: left;
+            margin: 1%;
+            width: 48%;
+            height: 96%;
+            padding: 100px 20px 0;
+            background-color: #fff;
+            border-radius: 1rem;
+            box-shadow: 0 2px 14px 0 rgba(0, 0, 0, 0.2);
+        }
+
+        /* 卡片左边内容 */
+        .choice {
+            width: 70%;
+            height: 20%;
+            margin: 5% 15%;
+            background-color: #fff;
+            border-radius: 1rem;
+            --width: 150px;
+            --timing: 2s;
+            padding-block: 1em;
+            font-weight: bold;
+            font-size: 1em;
+            transition: all 0.2s;
+            border: 2px solid #d4e5f3;
+        }
+
+        /* 卡片左边内容hover效果 */
+        .choice:hover {
+            background-image: linear-gradient(to right, rgb(250, 82, 82), rgb(250, 82, 82) 16.65%, rgb(190, 75, 219) 16.65%, rgb(190, 75, 219) 33.3%, rgb(76, 110, 245) 33.3%, rgb(76, 110, 245) 49.95%, rgb(64, 192, 87) 49.95%, rgb(64, 192, 87) 66.6%, rgb(250, 176, 5) 66.6%, rgb(250, 176, 5) 83.25%, rgb(253, 126, 20) 83.25%, rgb(253, 126, 20) 100%, rgb(250, 82, 82) 100%);
+            animation: var(--timing) linear dance infinite;
+            transform: scale(1.1) translateY(-1px);
+            color: #fff
+        }
+
+        /* 动画 */
+        @keyframes dance {
+            to {
+                background-position: var(--width);
+            }
+        }
+
+        /* 卡片右边 */
+        .cardright {
+            float: left;
+            margin-top: 1%;
+            width: 48%;
+            height: 96%;
+            padding: 10px;
+            background-color: #fff;
+            border-radius: 1rem;
+            box-shadow: 0 2px 14px 0 rgba(0, 0, 0, 0.2);
+            flex-direction: column;
+            overflow-y: auto;
+        }
+
+        /* 卡片右边滚轮样式 */
+        .cardright::-webkit-scrollbar {
+            width: 0px;
+        }
+
+        /* 卡片右边内容 */
+        .cardrightout {
+            display: none;
+            flex-direction: column;
+            gap: 1rem;
+            padding: 1rem;
+            background-color: #fff;
+        }
+
+        /* 输入样式 */
+        .input-section {
+            display: flex;
+            align-items: center;
+        }
+
+        .input-section input {
+            border: 2px solid #000;
+            border-radius: 5px;
+            padding: 10px;
+            margin-right: 5px;
+        }
+
+        .cardright button {
+            width: 100px;
+            height: 35px;
+            margin: 0 auto;
+            background-color: #007bff;
+            color: #fff;
+            border-radius: 5px;
+            transition: all 0.5s;
+        }
+
+        .cardright button:hover {
+            background-color: #48c500;
+        }
+
+        .cardright h3 {
+            font-size: 15px;
+            color: #333;
+            margin-left: 10px;
+            margin-bottom: 10px;
+        }
+
+        .cardright span {
+            font-size: 10px;
+            margin-left: 10px;
+        }
+
+        /* 二元计算部分 */
+        .calculationtwoyuan {
+            display: none;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .twoyuan input{
+            width: 180px;
+            height: 35px;
+            border-radius: 5px;
+            border: 2px solid #000;
+            padding: 10px;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="card">
+        <!-- 卡片左 -->
+        <div class="cardleft">
+            <button class="choice" onclick="showCalculationTwoYuan()">二元运算</button>
+            <button class="choice" onclick="showCalculation()">求两集合交并差补集</button>
+        </div>
+
+        <!-- 卡片右 -->
+        <div class="cardright">
+            <div id="calculationContainer" class="cardrightout">
+                <h2 style="text-align: center">求两集合交并差补集</h2>
+                <div class="input-section">
+                    <input type="text" id="set1Input" placeholder="请输入集合1的元素">
+                    <button onclick=" addToSet(set1, 'set1Input' )">Add</button>
+                </div>
+                <span>集合1的元素：</span>
+                <span id="set1Elements"></span>
+
+                <div class="input-section">
+                    <input type="text" id="set2Input" placeholder="请输入集合2的元素">
+                    <button onclick="addToSet(set2, 'set2Input')">Add</button>
+                </div>
+                <span>集合2的元素：</span>
+                <span id="set2Elements"></span>
+
+                <hr>
+
+                <button onclick="calculateAndDisplay()">计算</button>
+
+                <div id="resultContainer"></div>
+            </div>
+
+
+            <div class="calculationtwoyuan" id="calculationtwoyuan">
+                <div class="twoyuan">
+                    <h2 style="text-align: center">二元运算</h2>
+                    <h3>集合A:</h3>
+                    <input type="text" id="setA" placeholder=" 输入元素，用空格隔开">
+                    <button onclick="addElements('setA')" style="width: 50px;">Add</button>
+                </div>
+                <div class="twoyuan">
+                    <h3>集合B:</h3>
+                    <input type="text" id="setB" placeholder=" 输入元素，用空格隔开">
+                    <button onclick="addElements('setB')" style="width: 50px;">Add</button>
+                </div>
+                <div class="twoyuan">
+                    <button style="width: 70px;" onclick="calculateInverse()">逆运算</button>
+                    <button style="width: 70px;" onclick="calculateLeftComposition()">左复合</button>
+                    <button style="width: 70px;" onclick="calculateRightComposition()">右复合</button>
+                    <hr style="margin-top: 10px">
+                </div>
+                <div class="twoyuan">
+                    <h3>运算结果</h3>
+                    <div id="result"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const set1 = new Set();
+        const set2 = new Set();
+
+        function addToSet(set, inputId) {
+            const inputElement = document.getElementById(inputId);
+            const values = inputElement.value.trim().split(" ");
+
+            for (const value of values) {
+                if (value !== "") {
+                    set.add(value);
+                }
+            }
+
+            inputElement.value = ""; // 清空输入框
+            displaySetElements();
+        }
+
+        function displaySetElements() {
+            const set1ElementsContainer = document.getElementById("set1Elements");
+            const set2ElementsContainer = document.getElementById("set2Elements");
+
+            // 清空元素容器
+            set1ElementsContainer.innerHTML = "";
+            set2ElementsContainer.innerHTML = "";
+
+            // 显示集合1的元素
+            for (const element of set1) {
+                const listItem = document.createElement("span");
+                listItem.textContent = element + " ";
+                set1ElementsContainer.appendChild(listItem);
+            }
+
+            // 显示集合2的元素
+            for (const element of set2) {
+                const listItem = document.createElement("span");
+                listItem.textContent = element + " ";
+                set2ElementsContainer.appendChild(listItem);
+            }
+        }
+
+        function showCalculation() {
+            const calculationContainer = document.getElementById("calculationContainer");
+            calculationContainer.style.display = "flex"; // 显示计算区域
+        }
+
+        function calculateAndDisplay() {
+            const intersectionSet = new Set();
+            const unionSet = new Set(set1);
+            const differenceSet = new Set();
+
+            for (const element of set2) {
+                if (set1.has(element)) {
+                    intersectionSet.add(element);
+                }
+                unionSet.add(element);
+            }
+
+            for (const element of set1) {
+                if (!set2.has(element)) {
+                    differenceSet.add(element);
+                }
+            }
+
+            const resultContainer = document.getElementById("resultContainer");
+            resultContainer.innerHTML = ""; // 清空结果容器
+
+            // 创建并添加交集结果
+            const intersectionTitle = document.createElement("h3");
+            intersectionTitle.textContent = "交集：";
+            resultContainer.appendChild(intersectionTitle);
+            const intersectionList = document.createElement("span");
+            for (const element of intersectionSet) {
+                const listItem = document.createElement("span");
+                listItem.textContent = element + " ";
+                intersectionList.appendChild(listItem);
+            }
+            resultContainer.appendChild(intersectionList);
+
+            // 创建并添加并集结果
+            const unionTitle = document.createElement("h3");
+            unionTitle.textContent = "并集：";
+            resultContainer.appendChild(unionTitle);
+            const unionList = document.createElement("span");
+            for (const element of unionSet) {
+                const listItem = document.createElement("span");
+                listItem.textContent = element + " ";
+                unionList.appendChild(listItem);
+            }
+            resultContainer.appendChild(unionList);
+
+            // 创建并添加对称差集结果
+            const symmetricDifferenceTitle = document.createElement("h3");
+            symmetricDifferenceTitle.textContent = "对称差集：";
+            resultContainer.appendChild(symmetricDifferenceTitle);
+            const symmetricDifferenceList = document.createElement("span");
+
+            // 计算对称差集
+            const symmetricDifferenceSet = new Set([...set1, ...set2].filter(element => !(set1.has(element) && set2.has(element))));
+
+            for (const element of symmetricDifferenceSet) {
+                const listItem = document.createElement("span");
+                listItem.textContent = element + " ";
+                symmetricDifferenceList.appendChild(listItem);
+            }
+
+            resultContainer.appendChild(symmetricDifferenceList);
+
+            // 创建并添加相对补集结果
+            const relativeComplementTitle = document.createElement("h3");
+            relativeComplementTitle.textContent = "相对补集 (集合A - 集合B)：";
+            resultContainer.appendChild(relativeComplementTitle);
+            const relativeComplementList = document.createElement("span");
+
+            // 计算相对补集
+            const relativeComplementSet = new Set([...set1].filter(element => !set2.has(element)));
+
+            for (const element of relativeComplementSet) {
+                const listItem = document.createElement("span");
+                listItem.textContent = element + " ";
+                relativeComplementList.appendChild(listItem);
+            }
+
+            resultContainer.appendChild(relativeComplementList);
+
+
+        }
+    </script>
+    <script>
+        // 创建一个空集合A和集合B
+        let setA = new Set();
+        let setB = new Set();
+
+        // 添加元素到集合
+        function addElements(setId) {
+            const input = document.getElementById(setId);
+            const elements = input.value.split(" ");
+
+            if (setId === "setA") {
+                for (let i = 0; i < elements.length; i += 2) {
+                    const elementX = elements[i];
+                    const elementY = elements[i + 1];
+                    setA.add({ x: elementX, y: elementY });
+                }
+            } else if (setId === "setB") {
+                for (let i = 0; i < elements.length; i += 2) {
+                    const elementX = elements[i];
+                    const elementY = elements[i + 1];
+                    setB.add({ x: elementX, y: elementY });
+                }
+            }
+
+            input.value = "";
+        }
+
+        function showCalculationTwoYuan() {
+            const calculationContainer = document.getElementById("calculationtwoyuan");
+            calculationContainer.style.display = "flex"; // 显示计算区域
+        }
+
+        // 计算二元关系的逆运算
+        function calculateInverse() {
+            const inverseSet = new Set();
+
+            for (const element of setA) {
+                inverseSet.add({ x: element.y, y: element.x });
+            }
+
+            displayResult(inverseSet, "逆运算");
+        }
+
+        // 计算二元关系的左复合
+        function calculateLeftComposition() {
+            const leftCompositionSet = new Set();
+
+            for (const elementA of setA) {
+                for (const elementB of setB) {
+                    if (elementB.y === elementA.x) {
+                        leftCompositionSet.add({ x: elementB.x, y: elementA.y });
+                    }
+                }
+            }
+
+            displayResult(leftCompositionSet, "左复合");
+        }
+
+        // 计算二元关系的右复合
+        function calculateRightComposition() {
+            const rightCompositionSet = new Set();
+
+            for (const elementB of setB) {
+                for (const elementA of setA) {
+                    if (elementA.y === elementB.x) {
+                        rightCompositionSet.add({ x: elementA.x, y: elementB.y });
+                    }
+                }
+            }
+
+            displayResult(rightCompositionSet, "右复合");
+        }
+
+        // 显示运算结果
+        function displayResult(resultSet, operation) {
+            const result = document.getElementById("result");
+
+            // 清空之前的结果
+            result.innerHTML = "";
+
+            const heading = document.createElement("h3");
+            heading.textContent = operation;
+            result.appendChild(heading);
+
+            for (const element of resultSet) {
+                const elementText = document.createTextNode(`(${element.x}, ${element.y})`);
+                const elementParagraph = document.createElement("p");
+                elementParagraph.appendChild(elementText);
+                result.appendChild(elementParagraph);
+            }
+        }
+
+    </script>
+</body>
+
+</html>

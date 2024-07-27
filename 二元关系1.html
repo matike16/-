@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>二元关系计算器</title>
+    <style>
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .card {
+            width: 300px;
+            padding: 20px;
+            background-color: #f5f5f5;
+            border-radius: 5px;
+        }
+
+        .card h3 {
+            margin-top: 0;
+        }
+
+        .card input {
+            width: 100%;
+            margin-bottom: 10px;
+        }
+
+        .card button {
+            display: block;
+            margin-top: 10px;
+        }
+
+        #result {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="card">
+            <h3>集合A</h3>
+            <input type="text" id="setA" placeholder="输入元素，用空格隔开">
+            <button onclick="addElements('setA')">添加元素</button>
+        </div>
+        <div class="card">
+            <h3>集合B</h3>
+            <input type="text" id="setB" placeholder="输入元素，用空格隔开">
+            <button onclick="addElements('setB')">添加元素</button>
+        </div>
+        <div class="card">
+            <button onclick="calculateInverse()">逆运算</button>
+            <button onclick="calculateLeftComposition()">左复合</button>
+            <button onclick="calculateRightComposition()">右复合</button>
+        </div>
+        <div class="card">
+            <h3>运算结果</h3>
+            <div id="result"></div>
+        </div>
+    </div>
+
+    <script>
+        // 创建一个空集合A和集合B
+        let setA = new Set();
+        let setB = new Set();
+
+        // 添加元素到集合
+        function addElements(setId) {
+            const input = document.getElementById(setId);
+            const elements = input.value.split(" ");
+
+            if (setId === "setA") {
+                for (let i = 0; i < elements.length; i += 2) {
+                    const elementX = elements[i];
+                    const elementY = elements[i + 1];
+                    setA.add({ x: elementX, y: elementY });
+                }
+            } else if (setId === "setB") {
+                for (let i = 0; i < elements.length; i += 2) {
+                    const elementX = elements[i];
+                    const elementY = elements[i + 1];
+                    setB.add({ x: elementX, y: elementY });
+                }
+            }
+
+            input.value = "";
+        }
+
+        // 计算二元关系的逆运算
+        function calculateInverse() {
+            const inverseSet = new Set();
+
+            for (const element of setA) {
+                inverseSet.add({ x: element.y, y: element.x });
+            }
+
+            displayResult(inverseSet, "逆运算");
+        }
+
+        // 计算二元关系的左复合
+        function calculateLeftComposition() {
+            const leftCompositionSet = new Set();
+
+            for (const elementA of setA) {
+                for (const elementB of setB) {
+                    if (elementB.y === elementA.x) {
+                        leftCompositionSet.add({ x: elementB.x, y: elementA.y });
+                    }
+                }
+            }
+
+            displayResult(leftCompositionSet, "左复合");
+        }
+
+        // 计算二元关系的右复合
+        function calculateRightComposition() {
+            const rightCompositionSet = new Set();
+
+            for (const elementB of setB) {
+                for (const elementA of setA) {
+                    if (elementA.y === elementB.x) {
+                        rightCompositionSet.add({ x: elementA.x, y: elementB.y });
+                    }
+                }
+            }
+
+            displayResult(rightCompositionSet, "右复合");
+        }
+
+        // 显示运算结果
+        function displayResult(resultSet, operation) {
+            const result = document.getElementById("result");
+
+            // 清空之前的结果
+            result.innerHTML = "";
+
+            const heading = document.createElement("h3");
+            heading.textContent = operation;
+            result.appendChild(heading);
+
+            for (const element of resultSet) {
+                const elementText = document.createTextNode(`(${element.x}, ${element.y})`);
+                const elementParagraph = document.createElement("p");
+                elementParagraph.appendChild(elementText);
+                result.appendChild(elementParagraph);
+            }
+        }
+
+    </script>
+</body>
+
+</html>

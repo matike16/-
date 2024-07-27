@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="ch">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>哒哒的小屋 - 个人博客</title>
+    <link rel="stylesheet" href="./css/base.css">
+    <link rel="stylesheet" href="./css/common.css">
+    <link rel="stylesheet" href="./css/index.css">
+    <link rel="stylesheet" href="./iconfont/iconfont.css">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <script src="https://code.hcharts.cn/highcharts/highcharts.js"></script>
+    <script src="https://code.hcharts.cn/highcharts/highcharts-more.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <!-- 头部 -->
+        <div class="headerout">
+            <div class="header">
+                <div class="logo">
+                    <h1><a href="./index.html" class="logoa">哒哒的Blog</a></h1>
+                </div>
+                <div class="search">
+                    <input type="text" class="headerinput" placeholder="&nbsp;这里(maybe)有你想要的">
+                    <button class="headerbutton iconfont icon-sousuo"></button>
+                </div>
+                <div class="nav">
+                    <ul class="headerul">
+                        <li class="headerli box">
+                            <a href="#" class="headera item">
+                                <button type="button" class="headerspan iconfont icon-guanyu_o"
+                                    onclick="showpop">关于</button>
+                            </a>
+                        </li>
+                        <li class="headerli box dropdownbut">
+                            <a href="#" class="headera item">
+                                <span class="headerspan iconfont icon-shoucang">收藏</span>
+                            </a><span class="limar">|</span>
+                            <div class="dropdownout">
+                                <div class="dropdown">
+                                    <a href="#"><span class="iconfont icon-yinle">音乐</span></a>
+                                    <a href="#"><span class="iconfont icon-dianying">电影</span></a>
+                                    <a href="#"><span class="iconfont icon-wp-sj-2">书籍</span></a>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="headerli box">
+                            <a href="#" class="headera item">
+                                <span class="headerspan iconfont icon-icon-">友链</span>
+                            </a><span class="limar">|</span>
+                        </li>
+                        <li class="headerli box">
+                            <a href="#" class="headera item">
+                                <span class="headerspan iconfont icon-fenlei">分类</span>
+                            </a><span class="limar">|</span>
+                        </li>
+                        <li class="headerli box">
+                            <a href="#" class="headera item">
+                                <span class="headerspan iconfont icon-biaoqian">标签</span>
+                            </a><span class="limar">|</span>
+                        </li>
+                        <li class="headerli box">
+                            <a href="#" class="headera item">
+                                <span class="headerspan iconfont icon-a-Frame174">时间轴</span>
+                            </a><span class="limar">|</span>
+                        </li>
+                        <li class="headerli box">
+                            <a href="./index.html" class="headera item">
+                                <span class="headerspan iconfont icon-shouye">首页</span>
+                            </a><span class="limar">|</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- 登录弹窗 -->
+        <div id="mypop-up" class="pop-up">
+            <div class="pop-up-content">
+                <div class="leftpop">
+                    <div class="loginheader">
+                        <h2 class="title">登录</h2>
+                    </div>
+                    <div class="inputcontent">
+                        <input type="text" placeholder="name@mail.com">
+                    </div>
+                    <div class="inputcontent">
+                        <input type="text" placeholder="Password">
+                    </div>
+                </div>
+                <button onclick="hidepop">关闭</button>
+            </div>
+        </div>
+        <script src="JS/pop-up.js"></script>
+
+        <!-- 外部div撑开头部 -->
+        <div style=" width: 100%; height: 60px;"></div>
+
+        <!-- 网页背景动画 -->
+        <!-- <div class="catocard">
+        <div class="cloud front">
+            <span class="left-front"></span>
+            <span class="right-front"></span>
+        </div>
+        <span class="sun sunshine"></span>
+        <span class="sun"></span>
+        <div class="cloud back">
+            <span class="left-back"></span>
+            <span class="right-back"></span>
+        </div>
+    </div> -->
+        <!-- 划分左右两个界面 -->
+        <div class="content wrapper">
+            <div class="leftcolumn">
+                <div class="card leftcard1 clearfix">
+                    <!-- 个人信息展示card -->
+                    <div class="userlogo"><img src="./images/userlogo.webp" alt=""></div>
+                    <div class="usermes">
+                        <a href="#">
+                            <h1>哒哒溜</h1>
+                            <p>快快乐乐学习 开开心心生活</p>
+                        </a>
+                    </div>
+                    <hr style="border: 1px dashed #aaa; width: 65%; margin: 0 auto;">
+                    <div class="userlist">
+                        <div class="clearfix"><a href="#">文章<span>15</span></a></div>
+                        <div class="clearfix"><a href="#">标签<span>3</span></a></div>
+                        <div class="clearfix"><a href="#">分类<span>6</span></a></div>
+                    </div>
+                    <div class="userbut"><a href="https://github.com/matike16/HTML-CSS-JS-"><button><span
+                                    class="iconfont icon-github-fill"> Follow me</span></button></a>
+                    </div>
+                    <div class="usernav">
+                        <a href="https://github.com/matike16/HTML-CSS-JS-"><span
+                                class="iconfont icon-github-fill"></span></a>
+                        <a href="https://space.bilibili.com/20667502?spm_id_from=333.1007.0.0"><span
+                                class="iconfont icon-bilibili-line"></span></a>
+                        <a
+                            href="https://mail.qq.com/cgi-bin/frame_html?sid=l30FWoLXkmcxuy1J&r=43d0a282a2ff4e3cd601fbe82e1c8a64&lang=zh"><span
+                                class="iconfont icon-youxiang"></span></a>
+                        <a href="https://www.book123.info/"><span class="iconfont icon-ai235"></span></a>
+                    </div>
+                </div>
+                <div class="card flip-card">
+                    <!-- 文章信息与大纲卡 -->
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+
+                            <p class="title">(＾Ｕ＾)ノ~ＹＯ</p>
+                            <p>Put Your Hand Up</p>
+                            <p>(❤ ω ❤)can can see me</p>
+                        </div>
+                        <div class="flip-card-back">
+                            <span class="iconfont icon-gonggao"
+                                style="font-size:1.5em;font-weight: 900;text-align: center;margin-bottom: 20px;">公告</span>
+                            <p class="title"></p>
+                            <p>本站用于记录个人学习和生活</p>
+                            <p>欢迎各位大佬参与讨论</p>
+                            <p>本站借鉴于👉<a href="https://challis-yin.github.io/" style="color:yellow">林木木的小屋</a></p>
+                            <p>其中的butterfly主题</p>
+                            <p>Yoho 被发现了 (＃°Д°)</p>
+                            <p></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card leftcard3">
+                    <!-- 标签 -->
+                    <div class="cardtitle"><span class="iconfont icon-biaoqian"
+                            style="font-size:1.3em; color: #fff;"></span></div>
+                    <div class="cardcontent">
+                        <a href="">C语言</a>
+                        <a href="">JavaScript</a>
+                        <a href="">Python</a>
+                        <a href="">Java</a>
+                        <a href="">C++</a>
+                        <a href="">考研</a>
+                        <a href="">经验</a>
+                        <a href="">抑郁症</a>
+                        <a href="">随笔demo</a>
+                        <a href="">游戏</a>
+                    </div>
+                </div>
+                <div class="card leftcard4">
+                    <!-- 分类 -->
+                    <div class="cardtitle"><span class="iconfont icon-fenlei"
+                            style="font-size:1.3em; color: #fff;"></span></div>
+                    <div class="cardcontent">
+                        <div>
+                            <a href="#"><span class="tag-name">学习</span><span class="tag-count">2</span></a>
+                            <a href="#" style="padding-left: 20px;"><span class="tag-name">C语言</span><span class="tag-count">1</span></a>
+                            <a href="#" style="padding-left: 20px;"><span class="tag-name">Java</span><span class="tag-count">1</span></a>
+                            <a href="#" style="padding-left: 20px;"><span class="tag-name">Python</span><span class="tag-count">1</span></a>
+                        </div>
+                        <div>
+                            <a href="#"><span class="tag-name">休闲</span><span class="tag-count">1</span></a>
+                            <a href="#" style="padding-left: 20px;"><span class="tag-name">游戏</span><span class="tag-count">1</span></a>
+                        </div>
+                        <div>
+                            <a href="#"><span class="tag-name">日常</span><span class="tag-count">0</span></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="card leftcard5">
+                    <!-- 归档 -->
+                    <div class="cardtitle"><span class="iconfont icon-guidangxiangmu"
+                            style="font-size:1.3em; color: #fff;"></span></div>
+                    <div class="cardcontent">
+                        <a href="#"><span class="tag-name">2022</span><span class="tag-count">1月</span></a>
+                        <a href="#"><span class="tag-name">2022</span><span class="tag-count">1月</span></a>
+                        <a href="#"><span class="tag-name">2022</span><span class="tag-count">1月</span></a>
+                        <a href="#"><span class="tag-name">2022</span><span class="tag-count">1月</span></a>
+                        <a href="#"><span class="tag-name">2022</span><span class="tag-count">1月</span></a>
+                    </div>
+                </div>
+                <div class="card leftcard6">
+                    <!-- 网站咨询 -->
+                    <div class="cardtitle"><span class="iconfont icon-tongji"9
+                            style="font-size:1.3em; color: #fff;"></span></div>
+                    <div class="cardcontent">
+                        <div class="carditem">
+                            <div class="label">文章数目</div>
+                            <div class="value">1000</div>
+                        </div>
+                        <div class="carditem">
+                            <div class="label">已运行时间</div>
+                            <div class="value">2年</div>
+                        </div>
+                        <div class="carditem">
+                            <div class="label">本站总字数</div>
+                            <div class="value">100万</div>
+                        </div>
+                        <div class="carditem">
+                            <div class="label">本站总访客数</div>
+                            <div class="value">100万</div>
+                        </div>
+                        <div class="carditem">
+                            <div class="label">本站总访问量</div>
+                            <div class="value">100万</div>
+                        </div>
+                        <div class="carditem">
+                            <div class="label">最后更新时间</div>
+                            <div class="value">2022-01-01</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="rightcolumn">
+                <div class="card rightcard1">
+                    <!-- 轮播图或欢迎卡 -->
+                    <div id="wrap">
+                        <!-- 5张图片 -->
+                        <div class="img-list">
+                            <img src="images/bg1.png" alt="">
+                            <img src="images/bg2.png" alt="">
+                            <img src="images/bg3.png" alt="">
+                            <img src="images/bg4.png" alt="">
+                            <img src="images/bg5.png" alt="">
+                        </div>
+                        <!-- 左右按钮 -->
+                        <div class="arrow">
+                            <button type="button" class="left">
+                                <span class="iconfont icon-arrowcircleleft"></span>
+                            </button>
+                            <button type="button" class="right">
+                                <span class="iconfont icon-arrowcircleright"></span>
+                            </button>
+                        </div>
+                        <!-- 小圆点 -->
+                        <ul class="circle-list">
+                            <li class="circle active" data-n="0"></li>
+                            <li class="circle" data-n="1"></li>
+                            <li class="circle" data-n="2"></li>
+                            <li class="circle" data-n="3"></li>
+                            <li class="circle" data-n="4"></li>
+                        </ul>
+                    </div>
+                    <div id="rc1bubble"></div>
+                </div>
+                <div class="card rightcard2">
+                    <!-- 文章卡 -->
+                    <div id="rc2inner">
+                        <div class="rc2card" style="margin-left: 0;">
+                            <img src="./images/C1.png" alt="">
+                            <div class="card-info">
+                                <span>Category</span>
+                                <h1>Article Title</h1>
+                                <p>Article Description</p>
+                                <a href="#">Read More</a>
+                            </div>
+                        </div>
+                        <div class="rc2card">
+                            <img src="./images/C2.png" alt="">
+                            <div class="card-info">
+                                <span>Category</span>
+                                <h1>Article Title</h1>
+                                <p>Article Description</p>
+                                <a href="#">Read More</a>
+                            </div>
+                        </div>
+                        <div class="rc2card">
+                            <img src="./images/C3.png" alt="">
+                            <div class="card-info">
+                                <span>Category</span>
+                                <h1>Article Title</h1>
+                                <p>Article Description</p>
+                                <a href="#">Read More</a>
+                            </div>
+                        </div>
+                        <div class="rc2card">
+                            <img src="./images/C4.png" alt="">
+                            <div class="card-info">
+                                <span>Category</span>
+                                <h1>Article Title</h1>
+                                <p>Article Description</p>
+                                <a href="#">Read More</a>
+                            </div>
+                        </div>
+                        <div class="rc2card" style="margin-left: 0;">
+                            <img src="./images/C5.png" alt="">
+                            <div class="card-info">
+                                <span>Category</span>
+                                <h1>Article Title</h1>
+                                <p>Article Description</p>
+                                <a href="#">Read More</a>
+                            </div>
+                        </div>
+                        <div class="rc2card">
+                            <img src="./images/C6.png" alt="">
+                            <div class="card-info">
+                                <span>Category</span>
+                                <h1>Article Title</h1>
+                                <p>Article Description</p>
+                                <a href="#">Read More</a>
+                            </div>
+                        </div>
+                        <div class="rc2card">
+                            <img src="./images/C7.png" alt="">
+                            <div class="card-info">
+                                <span>Category</span>
+                                <h1>Article Title</h1>
+                                <p>Article Description</p>
+                                <a href="#">Read More</a>
+                            </div>
+                        </div>
+                        <div class="rc2card">
+                            <img src="./images/C8.png" alt="">
+                            <div class="card-info">
+                                <span>Category</span>
+                                <h1>Article Title</h1>
+                                <p>Article Description</p>
+                                <a href="#">Read More</a>
+                            </div>
+                        </div>
+                        <div class="rc2card" style="margin-left: 0;">
+                            <img src="./images/C9.png" alt="">
+                            <div class="card-info">
+                                <span>Category</span>
+                                <h1>Article Title</h1>
+                                <p>Article Description</p>
+                                <a href="#">Read More</a>
+                            </div>
+                        </div>
+                        <div class="rc2card">
+                            <img src="./images/C10.jpg" alt="">
+                            <div class="card-info">
+                                <span>Category</span>
+                                <h1>Article Title</h1>
+                                <p>Article Description</p>
+                                <a href="#">Read More</a>
+                            </div>
+                        </div>
+                        <div class="rc2card">
+                            <img src="./images/C11.jpg" alt="">
+                            <div class="card-info">
+                                <span>Category</span>
+                                <h1>Article Title</h1>
+                                <p>Article Description</p>
+                                <a href="#">Read More</a>
+                            </div>
+                        </div>
+                        <div class="rc2card">
+                            <img src="./images/C12.jpg" alt="">
+                            <div class="card-info">
+                                <span>Category</span>
+                                <h1>Article Title</h1>
+                                <p>Article Description</p>
+                                <a href="#">Read More</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card rightcard3">
+                    <!-- 功能区卡：用于集成一些个人小作业 -->
+                    <div class="rc3left">
+                        <button class="QiuJiHe" onclick="showCalculation()" style="margin-top: 50px;">求两集合交并差补集</button>
+                        <button class="QiuJiHe">真值表生成</button>
+                        <button class="QiuJiHe">二元运算</button>
+                    </div>
+                    <div class="rc3right">
+                        <div id="calculationContainer" class="rc3rightout" style="display: none;">
+                        <div class="input-section">
+                            <!-- <h2>输入集合1的元素：</h2> -->
+                            <input type="text" id="set1Input" placeholder="请输入集合1的元素" style="border: 2px solid #000; border-radius: 5px; padding: 10px;">
+                            <button onclick=" addToSet(set1, 'set1Input' )" style="width:35px;height: 35px; border-radius: 50%; background-color: #007bff; color: #fff;">Add</button>
+                        </div>
+            
+                        <div class="input-section">
+                            <span style="font-size: 10px;margin-left: 10px;">集合1的元素：</span>
+                            <span id="set1Elements"></span>
+                        </div>
+            
+                        <div class="input-section">
+                            <!-- <h2>输入集合2的元素：</h2> -->
+                            <input type="text" id="set2Input" placeholder="请输入集合2的元素" style="border: 2px solid #000; border-radius: 5px; padding: 10px;">
+                            <button onclick="addToSet(set2, 'set2Input')" style="width:35px;height: 35px; border-radius: 50%; background-color: #007bff; color: #fff;">Add</button>
+                        </div>
+            
+                        <div class="input-section">
+                            <span style="font-size: 10px;margin-left: 10px;">集合2的元素：</span>
+                            <span id="set2Elements"></span>
+                        </div>
+                        <hr>
+                        <button onclick="calculateAndDisplay()" style="width:100px;height: 35px; margin:0 auto; background-color: #007bff; color: #fff; border-radius: 5px;">计算</button>
+            
+                        <div id="resultContainer"></div>
+                    </div>
+                </div>
+                </div>
+                <div class="card rightcard4">
+                    <!-- 评论区卡 -->
+                </div>
+            </div>
+        </div>
+
+        <!-- 网页背景动画 -->
+        <!-- <div class="cloud front" style="float: right;">
+        <span class="left-front"></span>
+        <span class="right-front"></span>
+    </div> -->
+
+        <div id="sidebar">
+            <div>
+                <!-- <a href="./essay/C语言笔记/C 简介.html"></a> -->
+            </div>
+        </div>
+        <!-- 返回头部定位图标 -->
+        <div class="scroll-to-top">
+            <span class="iconfont icon-xiangshangshouqi-yuankuang"
+                style="font-size: 40px; transform: rotate(90deg);"></span>
+        </div>
+        <!-- 小彩蛋 -->
+        <div class="easter-egg-wrapper">
+            <button onclick="showModal()" class="easter-egg"><span class="iconfont icon-youxi"
+                    style="font-size: 35px; color: #fff;"></span></button>
+        </div>
+        <div id="myModal" class="modal">
+            <div class="modal-content">
+                <button onclick="goBack()" class="go-back"><span style="font-size: 30px ;font-weight: 600;"
+                        class="iconfont  icon-anniu_jiantouxiangzuo_o"></span></button>
+                <embed src="./像素小鸟飞行/index.html" width="320px" height="550px" id="myIframe"></embed>
+                <button onclick="hideModal()" class="close"><span style="font-size: 30px"
+                        class="iconfont icon-guanbi"></span></button>
+            </div>
+        </div>
+        <!-- 底部区域 -->
+        <!-- footerout用于撑开主题内容，因为上面都浮起来了，没有清除浮动 -->
+        <div class="footerout"></div>
+        <div class="footer">
+            <h3 style="font-weight: 800;">有趣的生活 快乐的学习</h3>
+            <p>本站著作权归哒哒溜所有</p>
+        </div>
+    </div>
+
+    <!-- 轮播图js -->
+    <script src="./JS/wrap.js"></script>
+    <!-- 弹窗 -->
+    <script src="./JS/modal.js"></script>
+    <!-- 对导航栏实现的隐藏效果 -->
+    <script src="./JS/headerhidden.js"></script>
+    <!-- 侧边栏 -->
+    <script src="./JS/sidebar.js"></script>
+    <!-- 返回顶部按钮 -->
+    <script src="./JS/scrolltotop.js"></script>
+    <!-- 气泡图 -->
+    <script src="./JS/bubble.js"></script>
+    <!-- 小彩蛋 -->
+    <script src="./JS/easter-egg.js"></script>
+    <!-- 拖拽效果 -->
+    <!-- <script src="./JS/mousemove.js"></script> -->
+    <!-- 背景动画 -->
+    <script src="./JS/background1.js"></script>
+    <script src="./JS/background.js"></script>
+    <!-- 看板娘 -->
+    <script src="https://fastly.jsdelivr.net/gh/stevenjoezhang/live2d-widget@latest/autoload.js"></script>
+    <!-- 计算集合 -->
+    <script src="./JS/computational-set.js"></script>
+</body>
+
+</html>
